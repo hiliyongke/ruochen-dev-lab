@@ -214,5 +214,8 @@ export default defineConfig({
     // 忽略 localhost 链接（用于示例代码）
     /^http:\/\/localhost/,
     /^https:\/\/localhost/,
+    // 忽略目录链接（VitePress 会误报为死链接）
+    /^\/frontend-debugging-handbook\/$/,
+    /^\/senior-frontend-engineer-interview-handbook\/$/,
   ],
 });
