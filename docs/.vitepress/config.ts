@@ -73,6 +73,10 @@ function extractTitleFromMarkdown(absPath: string): string | null {
 
 function toLinkPath(handbook: string, relFilePath: string): string {
   const withoutExt = relFilePath.replace(/\.md$/i, '');
+  // 如果是 index 文件，返回目录路径
+  if (withoutExt === 'index' || withoutExt.endsWith('/index')) {
+    return `/${handbook}/`;
+  }
   return `/${handbook}/${withoutExt}`;
 }
 
@@ -214,8 +218,5 @@ export default defineConfig({
     // 忽略 localhost 链接（用于示例代码）
     /^http:\/\/localhost/,
     /^https:\/\/localhost/,
-    // 忽略目录链接（VitePress 会误报为死链接）
-    /^\/frontend-debugging-handbook\/$/,
-    /^\/senior-frontend-engineer-interview-handbook\/$/,
   ],
 });
