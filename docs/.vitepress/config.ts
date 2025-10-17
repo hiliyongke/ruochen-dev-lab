@@ -201,6 +201,8 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'Ruochen Dev Lab',
   description: '前端工程与实践小册合集',
+  // GitHub Pages 部署配置
+  base: process.env.NODE_ENV === 'production' ? '/ruochen-dev-lab/' : '/',
   themeConfig: {
     nav: buildNav(),
     sidebar: buildSidebar(),
