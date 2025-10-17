@@ -1,0 +1,67 @@
+/* 全站排版增强：更舒适的阅读体验 */
+:root {
+  --vp-c-text-1: var(--vp-c-text-1);
+  --vp-code-font-size: 0.92rem;
+  --vp-content-line-height: 1.8;
+  --vp-custom-content-max: 860px;
+}
+
+/* 正文段落与列表的行距、段距 */
+.vp-doc {
+  max-width: var(--vp-custom-content-max);
+  margin-inline: auto;
+}
+
+.vp-doc p {
+  line-height: var(--vp-content-line-height);
+  margin: 0.9em 0 1.1em;
+}
+
+.vp-doc ul,
+.vp-doc ol {
+  line-height: 1.7;
+  margin: 0.6em 0 1em 1.2em;
+}
+
+/* 小标题与正文的间距 */
+.vp-doc h2 { margin-top: 2.0em; margin-bottom: 0.8em; }
+.vp-doc h3 { margin-top: 1.6em; margin-bottom: 0.6em; }
+
+/* 代码块：行号、长行换行与字号微调 */
+.vp-doc .vp-code, 
+.vp-doc pre code {
+  font-size: var(--vp-code-font-size);
+  white-space: pre-wrap;     /* 允许长行换行 */
+  word-break: break-word;
+}
+.vp-doc pre {
+  border-radius: 8px;
+  padding: 14px 14px;
+}
+
+/* 内联代码更清晰 */
+.vp-doc code:not(pre code) {
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+
+/* 提示块间距与可读性 */
+.vp-doc .custom-block {
+  margin: 1em 0 1.2em;
+}
+.vp-doc .custom-block .custom-block-title {
+  font-weight: 600;
+}
+
+/* 表格在窄屏避免挤压 */
+.vp-doc table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+/* 首屏首页 features 段落紧凑优化 */
+.home-features .details {
+  line-height: 1.7;
+}

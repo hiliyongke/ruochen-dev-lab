@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>配置与约束示例（前缀/动态类/说明）</title>
+  <script>
+    // 在 CDN 环境演示 prefix 前缀策略与 class 枚举映射
+    window.tailwind = window.tailwind || {};
+    tailwind.config = {
+      prefix: 'tw-',
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT:'#3BA4F0', 600:'#1E7FC1' } }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="tw-min-h-screen tw-bg-slate-950 tw-text-slate-100 tw-antialiased">
+  <header class="tw-sticky tw-top-0 tw-z-10 tw-backdrop-blur tw-bg-slate-950/70 tw-border-b tw-border-slate-800">
+    <div class="tw-mx-auto tw-max-w-6xl tw-px-4 tw-h-14 tw-flex tw-items-center tw-justify-between">
+      <div class="tw-font-semibold">配置与约束</div>
+      <nav class="tw-hidden sm:tw-flex tw-gap-4 tw-text-sm">
+        <a class="tw-text-slate-300 hover:tw-text-white" href="#prefix">前缀</a>
+        <a class="tw-text-slate-300 hover:tw-text-white" href="#dynamic">动态类名</a>
+        <a class="tw-text-slate-300 hover:tw-text-white" href="#safelist">safelist 说明</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="tw-mx-auto tw-max-w-6xl tw-px-4 tw-py-10 tw-space-y-12">
+    <section id="prefix">
+      <h2 class="tw-text-2xl tw-font-bold">prefix：tw-</h2>
+      <p class="tw-mt-3 tw-text-slate-300">本页所有类名都带有 <code>tw-</code> 前缀，用于避免与第三方样式冲突。</p>
+      <div class="tw-mt-4 tw-flex tw-gap-3">
+        <a class="tw-inline-flex tw-items-center tw-rounded-md tw-px-3 tw-py-1 tw-font-semibold tw-text-slate-900 tw-bg-brand hover:tw-bg-brand-600">品牌按钮</a>
+        <a class="tw-inline-flex tw-items-center tw-rounded-md tw-border tw-border-slate-700 tw-text-slate-200 hover:tw-border-slate-500 tw-px-3 tw-py-1">次要</a>
+      </div>
+    </section>
+
+    <section id="dynamic">
+      <h2 class="tw-text-2xl tw-font-bold">避免动态拼接类名：使用映射表</h2>
+      <p class="tw-mt-3 tw-text-slate-300">不要写 <code>class=`tw-text-${color}-600`</code>，构建时会被裁剪。改用“显式映射”。</p>
+      <div class="tw-mt-4">
+        <span id="status" class="tw-inline-flex tw-items-center tw-rounded-md tw-px-2 tw-py-0.5 tw-text-xs">状态标签</span>
+        <div class="tw-mt-3 tw-flex tw-gap-2">
+          <button class="tw-rounded tw-border tw-border-slate-700 tw-px-2 tw-py-1" data-state="ok">ok</button>
+          <button class="tw-rounded tw-border tw-border-slate-700 tw-px-2 tw-py-1" data-state="warn">warn</button>
+          <button class="tw-rounded tw-border tw-border-slate-700 tw-px-2 tw-py-1" data-state="err">err</button>
+        </div>
+      </div>
+      <script>
+        (function(){
+          const map = {
+            ok: 'tw-text-emerald-300 tw-bg-emerald-900/30 tw-ring-1 tw-ring-emerald-700/50',
+            warn:'tw-text-amber-300 tw-bg-amber-900/30 tw-ring-1 tw-ring-amber-700/50',
+            err: 'tw-text-rose-300 tw-bg-rose-900/30 tw-ring-1 tw-ring-rose-700/50'
+          };
+          const el = document.getElementById('status');
+          function apply(state){
+            el.className = 'tw-inline-flex tw-items-center tw-rounded-md tw-px-2 tw-py-0.5 tw-text-xs ' + (map[state] || 'tw-text-slate-300 tw-bg-slate-800 tw-ring-1 tw-ring-slate-700/50');
+            el.textContent = '状态：' + state;
+          }
+          document.querySelectorAll('[data-state]').forEach(btn=>{
+            btn.addEventListener('click', ()=> apply(btn.dataset.state));
+          });
+          apply('ok');
+        })();
+      </script>
+    </section>
+
+    <section id="safelist">
+      <h2 class="tw-text-2xl tw-font-bold">关于 safelist</h2>
+      <p class="tw-mt-3 tw-text-slate-300">
+        本示例为 CDN 环境演示，<code>safelist</code> 需要在构建链路的 tailwind.config 中配置。
+        当你的类名来源于“有限集合”（如枚举），可在 config 的 <code>safelist</code> 中声明，避免被裁剪。
+      </p>
+      <pre class="tw-mt-3 tw-rounded tw-bg-slate-900/60 tw-p-3 tw-text-[12px] tw-text-slate-300 tw-overflow-auto">
+safelist: [
+  'text-emerald-600',
+  { pattern: /(bg|text|border)-(emerald|amber|rose)-(400|600)/ }
+]
+      </pre>
+    </section>
+  </main>
+
+  <footer class="tw-mt-12 tw-py-6 tw-text-center tw-text-sm tw-text-slate-400">
+    Made with Tailwind CSS CDN (prefix: tw-)
+  </footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+# OS
+**/.DS_Store
+
+# Dependencies
+**/node_modules/
+
+# Logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+**/*.log
+
+# Env files
+**/.env
+**/.env.*
+**/!.env.example
+
+# Coverage
+**/coverage/
+
+# Build outputs (generic)
+**/dist/
+**/out/
+
+# VitePress
+**/.vitepress/dist/
+**/.vitepress/cache/
+**/.vitepress/.temp/
+
+# Temp files
+**/*.local
+**/tmp/
+**/temp/
+
+# IDE/editor
+**/.vscode/
+**/.idea/
+
+# Misc
+**/*.swp
+**/*.swo
+**/.codebuddy

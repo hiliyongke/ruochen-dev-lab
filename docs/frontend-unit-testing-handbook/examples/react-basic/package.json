@@ -1,0 +1,23 @@
+{
+  "name": "react-basic-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --coverage"
+  },
+  "devDependencies": {
+      "jest-axe": "^9.0.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitest/coverage-v8": "^2.1.9",
+    "jsdom": "^24.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.9"
+  }
+}

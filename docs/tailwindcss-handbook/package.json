@@ -1,0 +1,14 @@
+{
+  "name": "tailwindcss-handbook",
+  "private": true,
+  "version": "1.0.0",
+  "description": "《深入浅出之 Tailwind CSS》小册",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.4.0"
+  }
+}

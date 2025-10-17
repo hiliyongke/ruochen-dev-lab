@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "preserve",
+    "types": ["vitepress/client", "node"],
+    "skipLibCheck": true
+  },
+  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "../**/*.md"]
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hiliyongke.github.io/ruochen-dev-lab/sitemap.xml

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>设计系统示例：色彩/间距/排版</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --brand: #3BA4F0;
+      --brand-600: #1E7FC1;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:'#ebf5ff',100:'#d6ebff',200:'#add7ff',300:'#7fc1ff',
+              400:'#55aeff',500:'#3BA4F0',600:'#1E7FC1',700:'#176399',
+              800:'#114a73',900:'#0b3450',DEFAULT:'#3BA4F0'
+            },
+            success: { 500:'#22c55e',600:'#16a34a' },
+            warning: { 500:'#f59e0b',600:'#d97706' },
+            error:   { 500:'#ef4444',600:'#dc2626' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', 'Microsoft YaHei', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+          },
+          maxWidth: {
+            prose: '72ch'
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      h1,h2,h3 { @apply font-bold text-slate-100; }
+      h1 { @apply text-3xl sm:text-4xl leading-tight; }
+      h2 { @apply text-2xl leading-snug mt-8; }
+      p  { @apply text-slate-300 leading-7; }
+      code { @apply font-mono text-emerald-300; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <header class="sticky top-0 z-10 backdrop-blur bg-slate-950/70 border-b border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+      <div class="font-semibold tracking-wide">设计系统</div>
+      <nav class="hidden sm:flex gap-4 text-sm">
+        <a class="text-slate-300 hover:text-white" href="#palette">色板</a>
+        <a class="text-slate-300 hover:text-white" href="#spacing">间距</a>
+        <a class="text-slate-300 hover:text-white" href="#typography">排版</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10 space-y-16">
+    <!-- 色板 -->
+    <section id="palette">
+      <h1>品牌与语义色板</h1>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <article class="rounded-lg border border-slate-800 p-4 bg-slate-900/40">
+          <h3 class="font-semibold">Brand</h3>
+          <div class="mt-3 grid grid-cols-5 gap-2 text-[10px]">
+            <div class="h-10 rounded bg-brand-50 flex items-center justify-center">50</div>
+            <div class="h-10 rounded bg-brand-100 flex items-center justify-center">100</div>
+            <div class="h-10 rounded bg-brand-200 flex items-center justify-center">200</div>
+            <div class="h-10 rounded bg-brand-300 flex items-center justify-center">300</div>
+            <div class="h-10 rounded bg-brand-400 flex items-center justify-center">400</div>
+            <div class="h-10 rounded bg-brand-500 flex items-center justify-center">500</div>
+            <div class="h-10 rounded bg-brand-600 flex items-center justify-center">600</div>
+            <div class="h-10 rounded bg-brand-700 flex items-center justify-center">700</div>
+            <div class="h-10 rounded bg-brand-800 flex items-center justify-center">800</div>
+            <div class="h-10 rounded bg-brand-900 flex items-center justify-center">900</div>
+          </div>
+          <div class="mt-3 flex gap-3 text-xs">
+            <a class="inline-flex items-center rounded-md px-3 py-1 font-semibold text-slate-900 bg-brand-500 hover:bg-brand-600">按钮</a>
+            <a class="inline-flex items-center rounded-md px-3 py-1 border border-slate-700 text-slate-200 hover:border-slate-500">次要</a>
+          </div>
+        </article>
+        <article class="rounded-lg border border-slate-800 p-4 bg-slate-900/40">
+          <h3 class="font-semibold">Success</h3>
+          <div class="mt-3 flex gap-2">
+            <span class="w-10 h-10 rounded bg-success-500"></span>
+            <span class="w-10 h-10 rounded bg-success-600"></span>
+          </div>
+        </article>
+        <article class="rounded-lg border border-slate-800 p-4 bg-slate-900/40">
+          <h3 class="font-semibold">Warning</h3>
+          <div class="mt-3 flex gap-2">
+            <span class="w-10 h-10 rounded bg-warning-500"></span>
+            <span class="w-10 h-10 rounded bg-warning-600"></span>
+          </div>
+        </article>
+        <article class="rounded-lg border border-slate-800 p-4 bg-slate-900/40">
+          <h3 class="font-semibold">Error</h3>
+          <div class="mt-3 flex gap-2">
+            <span class="w-10 h-10 rounded bg-error-500"></span>
+            <span class="w-10 h-10 rounded bg-error-600"></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 间距与节奏 -->
+    <section id="spacing">
+      <h2>间距与节奏（8px 基线）</h2>
+      <div class="mt-6 max-w-prose">
+        <p>统一在段落使用 mt-3，区块使用 mt-6 或 mt-8，形成清晰的层次节奏。</p>
+        <p class="mt-3">使用 gap 控制网格与列表项间距，减少 margin 相互影响。</p>
+      </div>
+      <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <li class="rounded-lg border border-slate-800 p-6 bg-slate-900/40">卡片 A</li>
+        <li class="rounded-lg border border-slate-800 p-6 bg-slate-900/40">卡片 B</li>
+      </ul>
+    </section>
+
+    <!-- 排版 -->
+    <section id="typography">
+      <h2>排版与阅读宽度</h2>
+      <article class="mt-6 max-w-prose">
+        <p>正文建议使用 <code>leading-7</code> 或 <code>leading-relaxed</code>，并控制阅读宽度 <code>max-w-prose</code>（约 72ch）。</p>
+        <p class="mt-3">标题使用更大字号与稍紧行高，段落保持统一节奏，代码与行内高亮采用等宽与可视对比。</p>
+        <a class="inline-flex items-center rounded-md px-3 py-1 font-semibold text-slate-900
+                   bg-[var(--brand)] hover:bg-[var(--brand-600)] mt-4">
+          令牌驱动按钮
+        </a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="mt-12 py-6 text-center text-sm text-slate-400">
+    Made with Tailwind CSS CDN
+  </footer>
+</body>
+</html>

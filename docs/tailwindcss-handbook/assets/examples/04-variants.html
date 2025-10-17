@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>响应式与变体示例</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#3BA4F0', dark: '#1E7FC1' } }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <header class="sticky top-0 z-10 backdrop-blur bg-slate-950/70 border-b border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+      <div class="font-semibold tracking-wide">响应式与变体</div>
+      <nav class="hidden sm:flex gap-4 text-sm">
+        <a class="text-slate-300 hover:text-white transition-colors" href="#responsive">响应式</a>
+        <a class="text-slate-300 hover:text-white transition-colors" href="#states">状态</a>
+        <a class="text-slate-300 hover:text-white transition-colors" href="#group-peer">group/peer</a>
+        <a class="text-slate-300 hover:text-white transition-colors" href="#aria-data">aria/data</a>
+        <a class="text-slate-300 hover:text-white transition-colors" href="#others">其他</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10 space-y-16">
+    <!-- 响应式 -->
+    <section id="responsive">
+      <h2 class="text-2xl font-bold">响应式</h2>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a class="px-3 py-1 text-sm rounded bg-slate-800 text-slate-200 hover:bg-slate-700
+                   md:px-4 md:py-2 md:text-base">
+          自适应按钮
+        </a>
+        <span class="text-xs text-slate-400">≥768px 时尺寸增大</span>
+      </div>
+    </section>
+
+    <!-- 状态 -->
+    <section id="states">
+      <h2 class="text-2xl font-bold">状态与交互</h2>
+      <div class="mt-4 flex items-center gap-4">
+        <button class="rounded-md bg-brand px-4 py-2 text-slate-900 font-semibold
+                       hover:bg-brand-dark active:translate-y-px
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand
+                       disabled:bg-slate-600 disabled:text-slate-300 disabled:cursor-not-allowed">
+          交互按钮
+        </button>
+        <button disabled class="rounded-md bg-brand px-4 py-2 text-slate-900 font-semibold
+                                disabled:bg-slate-600 disabled:text-slate-300">
+          Disabled
+        </button>
+      </div>
+    </section>
+
+    <!-- group / peer -->
+    <section id="group-peer">
+      <h2 class="text-2xl font-bold">group 与 peer</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="group rounded-lg border border-slate-800 p-4 bg-slate-900/40">
+          <div class="text-xs text-slate-400 mb-2">group-hover</div>
+          <h3 class="font-semibold transition-colors group-hover:text-emerald-400">卡片标题</h3>
+          <p class="text-sm text-slate-400">悬停整卡时标题变色</p>
+        </div>
+
+        <label class="rounded-lg border border-slate-800 p-4 bg-slate-900/40 flex items-center gap-3">
+          <input type="checkbox" class="peer accent-emerald-600">
+          <span class="text-slate-300 peer-checked:text-emerald-400">选中我会变色</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- aria / data -->
+    <section id="aria-data">
+      <h2 class="text-2xl font-bold">aria-* 与 data-*</h2>
+      <div class="mt-4 space-y-4">
+        <button id="expander" aria-expanded="false"
+          class="rounded border border-slate-700 px-3 py-1 text-slate-200
+                 aria-expanded:true:bg-emerald-600 aria-expanded:true:text-slate-900 transition-colors">
+          展开
+        </button>
+        <div id="panel" data-state="closed"
+             class="rounded px-3 py-2 bg-slate-800 data-[state=open]:bg-emerald-600 transition-colors">
+          根据 data-state 切换底色
+        </div>
+        <script>
+          // 简单演示：点击切换 aria-expanded / data-state
+          const btn = document.getElementById('expander');
+          const panel = document.getElementById('panel');
+          btn.addEventListener('click', () => {
+            const v = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!v));
+            panel.setAttribute('data-state', v ? 'closed' : 'open');
+          });
+        </script>
+      </div>
+    </section>
+
+    <!-- 其他变体 -->
+    <section id="others">
+      <h2 class="text-2xl font-bold">其他变体</h2>
+      <div class="mt-6 grid sm:grid-cols-2 gap-6">
+        <div class="rounded-lg border border-slate-800 p-4">
+          <div class="text-xs text-slate-400 mb-2">motion-safe / motion-reduce</div>
+          <div class="h-8 w-24 rounded bg-emerald-600
+                      motion-safe:animate-pulse motion-reduce:transition-none"></div>
+        </div>
+        <div class="rounded-lg border border-slate-800 p-4">
+          <div class="text-xs text-slate-400 mb-2">print / supports / media 任意</div>
+          <div class="print:hidden">打印时隐藏此段</div>
+          <div class="mt-2 p-2 bg-slate-900/60 supports-[backdrop-filter]:backdrop-blur rounded">
+            支持 backdrop-filter 时模糊背景
+          </div>
+          <div class="mt-2 media-[orientation:landscape]:text-emerald-400">
+            横屏时这行会变成绿色
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-12 py-6 text-center text-sm text-slate-400">
+    Made with Tailwind CSS CDN
+  </footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>指令与插件体系（CDN 示例）</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT:'#3BA4F0', 600:'#1E7FC1' } }
+        }
+      }
+    }
+  </script>
+  <!-- 在 CDN 环境下：使用 @layer/@apply 扩展（不能使用 @tailwind base 注入） -->
+  <style type="text/tailwindcss">
+    @layer base {
+      .prose-like h1 { @apply text-3xl sm:text-4xl font-bold leading-tight text-slate-100; }
+      .prose-like h2 { @apply text-2xl font-bold leading-snug mt-6 text-slate-100; }
+      .prose-like p  { @apply text-slate-300 leading-7 mt-3; }
+      .prose-like a  { @apply text-emerald-400 hover:text-emerald-300 underline; }
+      .prose-like code { @apply font-mono text-emerald-300; }
+      .prose-like ul { @apply list-disc pl-5 mt-3 text-slate-300; }
+    }
+    @layer components {
+      .btn { @apply inline-flex items-center rounded-md px-3 py-1 font-semibold transition-colors; }
+      .btn-brand { @apply text-slate-900 bg-brand hover:bg-brand-600; }
+
+      .form-control { @apply w-full rounded-md border border-slate-700 bg-slate-900/40 px-3 py-2 text-slate-100 placeholder-slate-500; }
+      .form-control:focus { @apply outline-none ring-2 ring-emerald-500; }
+      .form-label { @apply block text-sm text-slate-400 mb-1; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <header class="sticky top-0 z-10 backdrop-blur bg-slate-950/70 border-b border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+      <div class="font-semibold tracking-wide">指令与插件（CDN）</div>
+      <nav class="hidden sm:flex gap-4 text-sm">
+        <a class="text-slate-300 hover:text-white" href="#prose">排版</a>
+        <a class="text-slate-300 hover:text-white" href="#forms">表单</a>
+        <a class="text-slate-300 hover:text-white" href="#lineclamp">多行截断</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10 space-y-16">
+    <!-- 类 prose 排版 -->
+    <section id="prose" class="prose-like">
+      <h1>类 Prose 排版（@layer base）</h1>
+      <p>在构建链路可安装 <code>@tailwindcss/typography</code>；CDN 环境下可用 @layer base 模拟常用正文样式。</p>
+      <ul>
+        <li>标题有明确层级与行高</li>
+        <li>段落统一的行高与段距</li>
+        <li>链接具备 hover 反馈</li>
+      </ul>
+      <a class="btn btn-brand mt-3" href="#">品牌按钮</a>
+    </section>
+
+    <!-- 表单基线 -->
+    <section id="forms">
+      <h2 class="text-2xl font-bold leading-snug">表单基线（组件层封装）</h2>
+      <div class="mt-4 grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="form-label" for="name">姓名</label>
+          <input id="name" class="form-control" placeholder="张三" />
+        </div>
+        <div>
+          <label class="form-label" for="email">邮箱</label>
+          <input id="email" type="email" class="form-control" placeholder="name@example.com" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="form-label" for="msg">留言</label>
+          <textarea id="msg" class="form-control" rows="4" placeholder="写点什么..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 多行截断（核心工具） -->
+    <section id="lineclamp">
+      <h2 class="text-2xl font-bold leading-snug">多行截断（line-clamp-*）</h2>
+      <article class="mt-4 rounded-lg border border-slate-800 p-4 bg-slate-900/40">
+        <h3 class="font-semibold">新闻摘要</h3>
+        <p class="mt-2 text-slate-300 line-clamp-3">
+          Tailwind CSS 提供 line-clamp-* 工具用于多行文本截断。在较新的版本中，
+          该功能已纳入核心工具，可以在无插件的前提下直接使用，例如 line-clamp-2、line-clamp-3。
+          结合响应式/交互变体，可以在不同断点展示不同的摘要行数。
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="mt-12 py-6 text-center text-sm text-slate-400">
+    Made with Tailwind CSS CDN
+  </footer>
+</body>
+</html>

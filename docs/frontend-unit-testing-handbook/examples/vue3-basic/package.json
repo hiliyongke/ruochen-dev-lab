@@ -1,0 +1,21 @@
+{
+  "name": "vue3-basic-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --coverage"
+  },
+  "devDependencies": {
+      "vue-router": "^4.4.5",
+    "vue": "^3.5.10",
+    "@testing-library/vue": "^8.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@vitest/coverage-v8": "^2.1.9",
+    "msw": "^2.3.0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "jsdom": "^24.0.0",
+    "vitest": "^2.1.9",
+    "typescript": "^5.5.4"
+  }
+}

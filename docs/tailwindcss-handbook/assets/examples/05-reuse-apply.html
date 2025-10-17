@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>@apply / 组件化 / 令牌示例</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --brand: #3BA4F0;
+      --brand-dark: #1E7FC1;
+      --radius: 0.75rem;
+      --sidebar-w: 18rem;
+    }
+  </style>
+  <!-- 使用 CDN 的 Tailwind 运行时，允许在 text/tailwindcss 中写 @layer/@apply -->
+  <style type="text/tailwindcss">
+    @layer components {
+      .btn {
+        @apply inline-flex items-center gap-2 rounded-md px-4 py-2 font-semibold transition-colors;
+      }
+      .btn-primary {
+        @apply text-slate-900;
+        background-color: var(--brand);
+      }
+      .btn-primary:hover { background-color: var(--brand-dark); }
+
+      .btn-secondary {
+        @apply border border-slate-700 text-slate-200 hover:border-slate-500;
+      }
+
+      .card {
+        @apply rounded-lg border border-slate-800 p-4 bg-slate-900/40;
+      }
+      .card-hover:hover {
+        @apply border-emerald-600;
+      }
+    }
+
+    @layer utilities {
+      .content-auto { content-visibility: auto; }
+      .radius-token { border-radius: var(--radius); }
+      .w-sidebar { width: var(--sidebar-w); }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <header class="sticky top-0 z-10 backdrop-blur bg-slate-950/70 border-b border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+      <div class="font-semibold tracking-wide">复用与抽象</div>
+      <nav class="hidden sm:flex gap-4 text-sm">
+        <a class="text-slate-300 hover:text-white transition-colors" href="#buttons">按钮</a>
+        <a class="text-slate-300 hover:text-white transition-colors" href="#cards">卡片</a>
+        <a class="text-slate-300 hover:text-white transition-colors" href="#tokens">令牌</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10 space-y-12">
+    <section id="buttons">
+      <h2 class="text-2xl font-bold">按钮封装（@layer components + @apply）</h2>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <button class="btn btn-primary">主按钮</button>
+        <button class="btn btn-secondary">次按钮</button>
+        <button class="btn btn-primary rounded-full">可微调（圆角）</button>
+      </div>
+      <p class="mt-2 text-xs text-slate-400">语义化类表达意图；具体细节仍可用原子类覆盖。</p>
+    </section>
+
+    <section id="cards">
+      <h2 class="text-2xl font-bold">卡片封装与 Hover 变体</h2>
+      <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="card">
+          <h3 class="font-semibold">基础卡片</h3>
+          <p class="mt-2 text-sm text-slate-400">使用 .card 的通用外观。</p>
+        </article>
+        <article class="card card-hover">
+          <h3 class="font-semibold">Hover 高亮</h3>
+          <p class="mt-2 text-sm text-slate-400">悬停时边框变为品牌色。</p>
+        </article>
+        <article class="card radius-token">
+          <h3 class="font-semibold">令牌圆角</h3>
+          <p class="mt-2 text-sm text-slate-400">通过 --radius 控制圆角。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="tokens">
+      <h2 class="text-2xl font-bold">令牌驱动与 Utilities 扩展</h2>
+      <div class="mt-4 flex items-center gap-4">
+        <aside class="w-sidebar h-16 bg-[var(--brand)] radius-token"></aside>
+        <button class="btn btn-primary">品牌按钮</button>
+      </div>
+      <p class="mt-2 text-xs text-slate-400">w-sidebar/bg-[var(--brand)]/radius-token 由令牌统一驱动。</p>
+    </section>
+  </main>
+
+  <footer class="mt-12 py-6 text-center text-sm text-slate-400">
+    Made with Tailwind CSS CDN
+  </footer>
+</body>
+</html>

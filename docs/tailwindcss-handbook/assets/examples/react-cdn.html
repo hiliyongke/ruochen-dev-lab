@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>React + Tailwind（CDN 示例）</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React 18 UMD + ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel Standalone 用于在浏览器内转译 JSX（仅演示） -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <div id="root"></div>
+  <script type="text/babel">
+    const colorMap = {
+      success: 'text-emerald-300 bg-emerald-900/30 ring-1 ring-emerald-700/50',
+      warn: 'text-amber-300 bg-amber-900/30 ring-1 ring-amber-700/50',
+      error: 'text-rose-300 bg-rose-900/30 ring-1 ring-rose-700/50',
+    };
+    function App() {
+      const [state, setState] = React.useState('success');
+      return (
+        <main className="mx-auto max-w-3xl p-6">
+          <h1 className="text-3xl font-bold">React + Tailwind（CDN）</h1>
+          <p className="mt-3 text-slate-300">无需脚手架，适合快速试验。</p>
+          <span className={'inline-flex items-center rounded px-2 py-0.5 text-sm ' + (colorMap[state] || '')}>状态：{state}</span>
+          <div className="mt-4 flex gap-2">
+            {['success','warn','error'].map(k => (
+              <button key={k} className="rounded border border-slate-700 px-2 py-1 hover:border-slate-500" onClick={()=>setState(k)}>{k}</button>
+            ))}
+          </div>
+        </main>
+      );
+    }
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

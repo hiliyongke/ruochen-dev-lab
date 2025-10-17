@@ -1,0 +1,22 @@
+{
+  "name": "ecmascript-handbook",
+  "version": "1.0.0",
+  "description": "深入浅出之 ECMAScript 手册",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "ecmascript",
+    "javascript",
+    "es6",
+    "vitepress"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress": "^1.0.0"
+  }
+}

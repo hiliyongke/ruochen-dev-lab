@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vue 3 + Tailwind（CDN 示例）</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    }
+  }
+  </script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <div id="app"></div>
+  <script type="module">
+    import { createApp, ref } from 'vue'
+    const App = {
+      setup(){
+        const state = ref('ok')
+        const map = {
+          ok:'text-emerald-300 bg-emerald-900/30 ring-1 ring-emerald-700/50',
+          warn:'text-amber-300 bg-amber-900/30 ring-1 ring-amber-700/50',
+          err:'text-rose-300 bg-rose-900/30 ring-1 ring-rose-700/50',
+        }
+        return { state, map }
+      },
+      template: `
+        <main class="mx-auto max-w-3xl p-6">
+          <h1 class="text-3xl font-bold">Vue 3 + Tailwind（CDN）</h1>
+          <p class="mt-3 text-slate-300">无需脚手架，适合快速试验。</p>
+          <span class="inline-flex items-center rounded px-2 py-0.5 text-sm" :class="map[state]">状态：{{ state }}</span>
+          <div class="mt-4 flex gap-2">
+            <button class="rounded border border-slate-700 px-2 py-1 hover:border-slate-500" @click="state='ok'">ok</button>
+            <button class="rounded border border-slate-700 px-2 py-1 hover:border-slate-500" @click="state='warn'">warn</button>
+            <button class="rounded border border-slate-700 px-2 py-1 hover:border-slate-500" @click="state='err'">err</button>
+          </div>
+        </main>
+      `
+    }
+    createApp(App).mount('#app')
+  </script>
+</body>
+</html>

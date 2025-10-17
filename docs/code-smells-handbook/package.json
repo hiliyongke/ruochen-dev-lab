@@ -1,0 +1,16 @@
+{
+  "name": "code-smells-handbook",
+  "version": "1.0.0",
+  "description": "《代码的坏味道》技术学习手册",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "markdown-it-mermaid": "^0.2.5",
+    "mermaid": "^10.9.4",
+    "vitepress": "^1.0.0"
+  }
+}

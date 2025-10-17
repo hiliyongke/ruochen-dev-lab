@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>布局体系示例 (Flex/Grid)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <!-- 导航（Flex） -->
+  <header class="h-14 flex items-center justify-between px-4 bg-slate-900 border-b border-slate-800 sticky top-0 z-10">
+    <div class="font-semibold">Brand</div>
+    <nav class="hidden sm:flex items-center gap-4 text-sm">
+      <a class="text-slate-300 hover:text-white" href="#two-col">两栏</a>
+      <a class="text-slate-300 hover:text-white" href="#three-col">三栏</a>
+      <a class="text-slate-300 hover:text-white" href="#grid-cards">卡片网格</a>
+      <a class="text-slate-300 hover:text-white" href="#media">媒体对象</a>
+      <a class="text-slate-300 hover:text-white" href="#masonry">“瀑布流”</a>
+    </nav>
+    <button class="sm:hidden rounded-md border border-slate-700 px-3 py-1">菜单</button>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10 space-y-16">
+    <!-- 两栏（Grid 轨道） -->
+    <section id="two-col">
+      <h2 class="text-2xl font-bold">两栏（grid-cols-[1fr_320px]）</h2>
+      <div class="mt-6 grid md:grid-cols-[1fr_320px] gap-6">
+        <main class="rounded-lg border border-slate-800 p-4 min-h-[200px] bg-slate-900/40">主内容</main>
+        <aside class="rounded-lg border border-slate-800 p-4 bg-slate-900/40">侧栏</aside>
+      </div>
+    </section>
+
+    <!-- 三栏（圣杯布局） -->
+    <section id="three-col">
+      <h2 class="text-2xl font-bold">三栏（圣杯布局）</h2>
+      <div class="mt-6 grid lg:grid-cols-[240px_1fr_280px] gap-6">
+        <aside class="rounded-lg border border-slate-800 p-4 bg-slate-900/40">左栏</aside>
+        <main class="rounded-lg border border-slate-800 p-4 min-h-[200px] bg-slate-900/40">主内容</main>
+        <aside class="rounded-lg border border-slate-800 p-4 bg-slate-900/40">右栏</aside>
+      </div>
+    </section>
+
+    <!-- 卡片网格 -->
+    <section id="grid-cards">
+      <h2 class="text-2xl font-bold">卡片网格（1→2→3 列）</h2>
+      <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <li class="rounded-xl border border-slate-800 p-4 bg-slate-900/40">卡片 1</li>
+        <li class="rounded-xl border border-slate-800 p-4 bg-slate-900/40">卡片 2</li>
+        <li class="rounded-xl border border-slate-800 p-4 bg-slate-900/40">卡片 3</li>
+        <li class="rounded-xl border border-slate-800 p-4 bg-slate-900/40">卡片 4</li>
+        <li class="rounded-xl border border-slate-800 p-4 bg-slate-900/40">卡片 5</li>
+        <li class="rounded-xl border border-slate-800 p-4 bg-slate-900/40">卡片 6</li>
+      </ul>
+    </section>
+
+    <!-- 媒体对象（Flex） -->
+    <section id="media">
+      <h2 class="text-2xl font-bold">媒体对象（头像 + 文本）</h2>
+      <article class="mt-6 flex gap-4">
+        <img class="w-16 h-16 rounded-lg object-cover" src="https://picsum.photos/96" alt="">
+        <div class="flex-1">
+          <h3 class="font-semibold">标题</h3>
+          <p class="text-sm text-slate-400">多行文本也能与头像自然对齐</p>
+          <div class="mt-2 flex items-center gap-2">
+            <span class="inline-flex items-center rounded bg-emerald-600 px-2 py-0.5 text-xs">标签</span>
+            <span class="text-xs text-slate-400">· 2 min read</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- “瀑布流”（近似模拟） -->
+    <section id="masonry">
+      <h2 class="text-2xl font-bold">“瀑布流”（auto-rows + row-span）</h2>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[10px]">
+        <div class="rounded-lg border border-slate-800 p-4 bg-slate-900/40 row-span-12">短内容</div>
+        <div class="rounded-lg border border-slate-800 p-4 bg-slate-900/40 row-span-20">较长内容<br/>...</div>
+        <div class="rounded-lg border border-slate-800 p-4 bg-slate-900/40 row-span-14">中等内容</div>
+        <div class="rounded-lg border border-slate-800 p-4 bg-slate-900/40 row-span-18">更长内容<br/>...<br/>...</div>
+      </div>
+      <p class="mt-2 text-xs text-slate-500">更复杂瀑布流建议 Masonry/JS 方案。</p>
+    </section>
+  </main>
+
+  <footer class="mt-8 py-6 text-center text-sm text-slate-400">
+    Made with Tailwind CSS CDN
+  </footer>
+</body>
+</html>
